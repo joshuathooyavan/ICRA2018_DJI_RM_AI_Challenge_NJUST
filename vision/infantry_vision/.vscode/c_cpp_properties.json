@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/opt/ros/noetic/include/**",
+                "/home/joshua/catkin_ws/src/beginner_tutorials/include/**",
+                "/usr/include/**",
+                "/usr/include/opencv4"
+            ],
+            "name": "ROS"
+        }
+    ],
+    "version": 4
+}

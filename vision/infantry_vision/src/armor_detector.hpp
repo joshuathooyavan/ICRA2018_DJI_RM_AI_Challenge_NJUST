@@ -486,7 +486,7 @@ void ArmorDetector::findContourInEnemyColor(
         vector<vector<Point2i> > &contours_right){
     vector<vector<Point2i> > contours_br;
     vector<Vec4i> hierarchy;
-    findContours(_max_color, contours_br, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+    findContours(_max_color, contours_br, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
     vector<vector<Point2i> >::const_iterator it = contours_br.begin();
     ROS_INFO("findContourInEnemyColor");
 //    _para.enemy_color = BLUE;
@@ -521,7 +521,7 @@ void ArmorDetector::findContourInEnemyColor(
 
 #ifdef SHOW_DEBUG_IMG
     Mat _max_color_rgb;
-    cvtColor(_max_color, _max_color_rgb, CV_GRAY2BGR);
+    cvtColor(_max_color, _max_color_rgb, cv::COLOR_GRAY2BGR);
 //    imshow("_max_color_rgb", _max_color_rgb);
 #endif
 
@@ -558,7 +558,7 @@ void ArmorDetector::findContourInEnemyColor(
         rectangle(_max_color_rgb, rect, color, 2);
         char slope_str[15];
         sprintf(slope_str, "%d,%d", rect.width, rect.height);
-        putText(_max_color_rgb, slope_str, Point(rect.x, rect.y), CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        putText(_max_color_rgb, slope_str, Point(rect.x, rect.y), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
         imshow("_max_color_rgb", _max_color_rgb);
 #endif
         int min_i = rect.x;
@@ -731,8 +731,8 @@ void ArmorDetector::findTargetInContours(
         Scalar color(rand() & 255, rand() & 255, rand() & 255);
         char slope_str[15];
         sprintf(slope_str, "%.1f", angle);
-        putText(contours_show_left, slope_str, contours_left[i][0], CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
-        drawContours(contours_show_left, contours_left, i, color, CV_FILLED, 8);
+        putText(contours_show_left, slope_str, contours_left[i][0], cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        drawContours(contours_show_left, contours_left, i, color, cv::FILLED, 8);
 #endif
         // the contour must be near-vertical
         float delta_angle = abs(angle - 90);
@@ -756,8 +756,8 @@ void ArmorDetector::findTargetInContours(
         Scalar color(rand() & 255, rand() & 255, rand() & 255);
         char slope_str[15];
         sprintf(slope_str, "%.1f", angle);
-        putText(contours_show_right, slope_str, contours_right[i][0], CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
-        drawContours(contours_show_right, contours_right, i, color, CV_FILLED, 8);
+        putText(contours_show_right, slope_str, contours_right[i][0], cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        drawContours(contours_show_right, contours_right, i, color, cv::FILLED, 8);
 #endif
         // the contour must be near-vertical
         float delta_angle = abs(angle - 90);

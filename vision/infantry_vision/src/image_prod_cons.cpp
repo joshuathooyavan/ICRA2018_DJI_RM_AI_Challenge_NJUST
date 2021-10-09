@@ -144,7 +144,7 @@ void ImageProdCons::draw(Mat& img)
 
     line(img,  pt0,  pt1, Scalar(0, 0, 255),0.2);
 
-    putText(img, "Left", cvPoint(50,240), FONT_HERSHEY_SIMPLEX, 1, cvScalar(255,0,0), 2, CV_AA);
+    putText(img, "Left", cvPoint(50,240), FONT_HERSHEY_SIMPLEX, 1, cvScalar(255,0,0), 2, cv::LINE_AA);
     imshow( "try to draw on the image", img );
 }
 

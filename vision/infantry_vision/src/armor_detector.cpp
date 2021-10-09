@@ -128,11 +128,11 @@ void ArmorDetector::findContourInEnemyColor(
                 cv::Mat & left, cv::Mat & right,
         vector<vector<Point2i> > &contours_left,
         vector<vector<Point2i> > &contours_right){
-    cout<<"findContourInEnemyColor="<<1<endl;
+    cout<<"findContourInEnemyColor="<<1<<endl;
     vector<vector<Point2i> > contours_br;
     vector<Vec4i> hierarchy;
     ROS_INFO("FINDcONTOUS");
-    findContours(_max_color, contours_br, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+    findContours(_max_color, contours_br, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
     vector<vector<Point2i> >::const_iterator it = contours_br.begin();
 
     // left lamp template
@@ -161,7 +161,7 @@ void ArmorDetector::findContourInEnemyColor(
 
 #ifdef SHOW_DEBUG_IMG
     Mat _max_color_rgb;
-    cvtColor(_max_color, _max_color_rgb, CV_GRAY2BGR);
+    cvtColor(_max_color, _max_color_rgb, cv::COLOR_GRAY2BGR);
 #endif
     cout<<"sclar&d"<<1<<endl;
     while(it != contours_br.end()){
@@ -171,7 +171,7 @@ void ArmorDetector::findContourInEnemyColor(
         rectangle(_max_color_rgb, rect, color, 2);
         char slope_str[15];
         sprintf(slope_str, "%d,%d", rect.width, rect.height);
-        putText(_max_color_rgb, slope_str, Point(rect.x, rect.y), CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        putText(_max_color_rgb, slope_str, Point(rect.x, rect.y), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
 #endif
 //        if ((rect.height < _para.min_light_height) ||
 //            (rect.height > 15 && rect.width > 0.6 * rect.height + 0.5) ||
@@ -303,8 +303,8 @@ void ArmorDetector::findContourInEnemyColor(
     cv::imshow("contrast_left", left);
     cv::imshow("contrast_right", right);
 #endif
-    findContours(left, contours_left, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
-    findContours(right, contours_right, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
+    findContours(left, contours_left, hierarchy, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
+    findContours(right, contours_right, hierarchy, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
 
 #ifdef COUT_LOG
         cout << "contours_br:" << contours_br.size() << endl;
@@ -358,8 +358,8 @@ void ArmorDetector::findTargetInContours(
         Scalar color(rand() & 255, rand() & 255, rand() & 255);
         char slope_str[15];
         sprintf(slope_str, "%.1f", angle);
-        putText(contours_show_left, slope_str, contours_left[i][0], CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
-        drawContours(contours_show_left, contours_left, i, color, CV_FILLED, 8);
+        putText(contours_show_left, slope_str, contours_left[i][0], cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        drawContours(contours_show_left, contours_left, i, color, cv::FILLED, 8);
 #endif
         // the contour must be near-vertical
         float delta_angle = abs(angle - 90);
@@ -383,8 +383,8 @@ void ArmorDetector::findTargetInContours(
         Scalar color(rand() & 255, rand() & 255, rand() & 255);
         char slope_str[15];
         sprintf(slope_str, "%.1f", angle);
-        putText(contours_show_right, slope_str, contours_right[i][0], CV_FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
-        drawContours(contours_show_right, contours_right, i, color, CV_FILLED, 8);
+        putText(contours_show_right, slope_str, contours_right[i][0], cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, color, 1);
+        drawContours(contours_show_right, contours_right, i, color, cv::FILLED, 8);
 #endif
         // the contour must be near-vertical
         float delta_angle = abs(angle - 90);
@@ -695,14 +695,14 @@ cv::RotatedRect ArmorDetector::chooseTarget(const std::vector<cv::RotatedRect> &
     Rect ret_rect1 = ret_rect.boundingRect();
     if (broadenRect(ret_rect1, 3, 3, _src.size()) == false)
         return ret_rect;
-    //rectangle(_src, ret_rect1, CV_RGB(255,128,128),2);
+    //rectangle(_src, ret_rect1, cv::RGB(255,128,128),2);
     //imshow("_src", _src);
 
 //    Mat s_b = _ec(ret_rect1);
-//    threshold(s_b, s_b, 128, 255, CV_THRESH_OTSU);
+//    threshold(s_b, s_b, 128, 255, cv::THRESH_OTSU);
 //    vector<vector<Point2i> > contours_br;
 //	vector<Vec4i> hierarchy;
-//    findContours(s_b, contours_br, hierarchy, CV_RETR_EXTERNAL , CV_CHAIN_APPROX_SIMPLE);
+//    findContours(s_b, contours_br, hierarchy, cv::RETR_EXTERNAL , cv::CHAIN_APPROX_SIMPLE);
 //    for (int k = 0; k < contours_br.size(); ++ k){
 //        Rect r = boundingRect(contours_br[k]);
 //        if (r.height > ret_rect.size.height){

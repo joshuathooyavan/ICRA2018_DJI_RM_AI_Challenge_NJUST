@@ -111,12 +111,14 @@ void Settings::check(){
 
 void Settings::write(FileStorage& fs) {
     // for debug image
-    cvWriteComment(*fs, "\nFor Debug Image", 0);
+        fs.writeComment("\nFor Debug Image", 0);
+
     fs << "show_image" << show_image;
     fs << "save_result" << save_result;
 
     // for armor system
-    cvWriteComment(*fs, "\nParameter for Armor Detection System", 0);
+    fs.writeComment("\nParameter for Armor Detection System", 0);
+    
     fs << "min_light_gray" << armor.min_light_gray
         << "min_light_height" << armor.min_light_height
         << "avg_contrast_threshold" << armor.avg_contrast_threshold
@@ -131,17 +133,17 @@ void Settings::write(FileStorage& fs) {
         << "br_threshold" << armor.br_threshold;
 
     // for enemy color
-    cvWriteComment(*fs, "\nParameter for Enemy Color, 0(default) means for red, otherwise blue", 0);
+    fs.writeComment("\nParameter for Enemy Color, 0(default) means for red, otherwise blue", 0);
     fs << "enemy_color" << armor.enemy_color;
 
 
     // for armor template
-    cvWriteComment(*fs, "\nParameter for Template", 0);
+    fs.writeComment( "\nParameter for Template", 0);
     fs << "template_image_file" << template_image_file;
     fs << "small_template_image_file" << std::string("small_template_image_file");
 
     // for system mode
-    cvWriteComment(*fs, "\nParameter for Vision System Mode, 0(default) means for armor detection mode, 1 means for rune system mode", 0);
+    fs.writeComment("\nParameter for Vision System Mode, 0(default) means for armor detection mode, 1 means for rune system mode", 0);
     fs << "mode" << mode;
 }
 
