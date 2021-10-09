@@ -11,7 +11,8 @@
                 "/usr/include/**",
                 "/usr/include/opencv4"
             ],
-            "name": "ROS"
+            "name": "ROS",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

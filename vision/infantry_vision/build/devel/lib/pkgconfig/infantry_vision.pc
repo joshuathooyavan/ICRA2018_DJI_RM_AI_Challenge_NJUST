@@ -1,0 +1,8 @@
+prefix=/home/joshua/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/build/devel
+
+Name: infantry_vision
+Description: Description of infantry_vision
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

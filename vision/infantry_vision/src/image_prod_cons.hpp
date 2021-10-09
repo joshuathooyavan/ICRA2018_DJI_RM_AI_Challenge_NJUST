@@ -80,15 +80,18 @@ public:
         image_sub = _it.subscribe(input_image_topic, 1,&ImageProdCons::imageCb, this);
         image_pub = _it.advertise(output_image_topic, 1);
 
-        config_file_name = (char*)"/home/cqw/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/param_config.xml";
+        config_file_name = (char*)"/home/joshua/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/param_config.xml";
         Settings setting(config_file_name);
         ROS_INFO("SHOW_IMAGE=%d", setting.show_image);
         settings = &setting;
 
         ArmorDetector armor_detectors(settings->armor);
+        
         armor_detector = armor_detectors;
-        Mat template_img = imread("/home/cqw/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/template.bmp");
-        Mat small_template_img = imread("/home/cqw/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/small_template.bmp");
+        Mat template_img = imread("/home/joshua/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/template.bmp");
+
+        Mat small_template_img = imread("/home/joshua/catkin_ws/src/ICRA2018_DJI_RM_AI_Challenge_NJUST/vision/infantry_vision/config/small_template.bmp");
+            
         armor_detector.initTemplate(template_img, small_template_img);
         armor_detector.setPara(settings->armor);
         ROS_INFO("armor_detectorsetPara_enemy_color=%d", armor_detector._para.enemy_color);
